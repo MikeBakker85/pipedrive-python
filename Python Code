@@ -1,0 +1,53 @@
+# -*- coding: utf-8 -*-
+"""
+Pipedrive data: deals & activities
+
+Created on Mon Apr 17 10:38:55 2017
+
+@author: MikeBakker
+"""
+import requests, json, pprint
+import pandas as pd
+
+
+print("printing activities")
+
+type = "activities"
+url1="https://houseofperformance.pipedrive.com/v1/"+type+"?api_token=b14796e98bc16366190359c1ceee436dad2dd414&&start=0&limit=500"
+#url2="https://houseofperformance.pipedrive.com/v1/"+type+"?api_token=b14796e98bc16366190359c1ceee436dad2dd414&&start=500&limit=1000"
+
+a1 = requests.get(url=url1)
+a= a1.json()
+acts1 = list(a['data'])
+df1 = pd.DataFrame(acts1)
+
+if a1.status_code == 200:
+    print("Connection OK")
+
+
+print("printing deals")
+
+type = "deals"
+url="https://houseofperformance.pipedrive.com/v1/"+type+"?api_token=b14796e98bc16366190359c1ceee436dad2dd414&&start=0&limit=500"
+url2="https://houseofperformance.pipedrive.com/v1/"+type+"?api_token=b14796e98bc16366190359c1ceee436dad2dd414&&start=500&limit=1000"
+
+a1 = requests.get(url=url)
+b = requests.get(url=url2)
+a= a1.json()
+b = b.json()
+
+deals1 = list(a['data'])
+deals2 = list(b['data'])
+
+df2 = pd.DataFrame(deals1)
+df3 = pd.DataFrame(deals2)
+df4=pd.concat([df2,df3])
+
+if a1.status_code == 200:
+    print("Connection OK")
+
+#merging the datasets
+d=df1.append(df4)
+d.to_excel('Pipedrive data.xlsx', sheet_name="pipedrive", index=False)
+
+print("done")
