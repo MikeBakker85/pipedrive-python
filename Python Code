@@ -9,12 +9,12 @@ Created on Mon Apr 17 10:38:55 2017
 import requests, json, pprint
 import pandas as pd
 
-
+API_token = #type here your token
 print("printing activities")
 
 type = "activities"
-url1="https://houseofperformance.pipedrive.com/v1/"+type+"?api_token=b14796e98bc16366190359c1ceee436dad2dd414&&start=0&limit=500"
-#url2="https://houseofperformance.pipedrive.com/v1/"+type+"?api_token=b14796e98bc16366190359c1ceee436dad2dd414&&start=500&limit=1000"
+url1="https://houseofperformance.pipedrive.com/v1/"+type+"?api_token=API_token&&start=0&limit=500"
+#url2="https://houseofperformance.pipedrive.com/v1/"+type+"?api_token=API_token&&start=500&limit=1000"
 
 a1 = requests.get(url=url1)
 a= a1.json()
@@ -28,8 +28,8 @@ if a1.status_code == 200:
 print("printing deals")
 
 type = "deals"
-url="https://houseofperformance.pipedrive.com/v1/"+type+"?api_token=b14796e98bc16366190359c1ceee436dad2dd414&&start=0&limit=500"
-url2="https://houseofperformance.pipedrive.com/v1/"+type+"?api_token=b14796e98bc16366190359c1ceee436dad2dd414&&start=500&limit=1000"
+url="https://houseofperformance.pipedrive.com/v1/"+type+"?api_token=API_token&&start=0&limit=500"
+url2="https://houseofperformance.pipedrive.com/v1/"+type+"?api_token=API_token&&start=500&limit=1000"
 
 a1 = requests.get(url=url)
 b = requests.get(url=url2)
